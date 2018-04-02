@@ -23,6 +23,13 @@ public class SQLAdapter implements SQLChainDataSource  {
 
     private Connection connection;
 
+    /**
+     * Constructor for SQLAdapter, creates a connection to a database using username & password
+     * @param databaseUrl the url of the database being connected to (including driver prefix - See https://www.tutorialspoint.com/jdbc/jdbc-db-connections.htm)
+     * @param databaseUsername username used to connect to the database
+     * @param databasePassword password used to connect to the database
+     * @throws ChainDataSourceException Exception caused by issue establishing database connection
+     */
     public SQLAdapter(String databaseUrl, String databaseUsername, String databasePassword) throws ChainDataSourceException {
         try {
             registerDriver(databaseUrl);
@@ -32,6 +39,11 @@ public class SQLAdapter implements SQLChainDataSource  {
         }
     }
 
+    /**
+     * Constructor for SQLAdapter, creates a connection to a database without a username & password
+     * @param databaseUrl the url of the database being connected to (including driver prefix - See https://www.tutorialspoint.com/jdbc/jdbc-db-connections.htm)
+     * @throws ChainDataSourceException Exception caused by issue establishing database connection
+     */
     public SQLAdapter(String databaseUrl) throws ChainDataSourceException {
         try {
             registerDriver(databaseUrl);
@@ -41,6 +53,10 @@ public class SQLAdapter implements SQLChainDataSource  {
         }
     }
 
+    /**
+     * Constructor for SQLAdapter, uses a pre-created connection to connect to a database
+     * @param connection Pre-created connection to a database
+     */
     public SQLAdapter(Connection connection)  {
         this.connection = connection;
     }
@@ -48,7 +64,7 @@ public class SQLAdapter implements SQLChainDataSource  {
     /**
      * Registers the correct database driver by dynamically loading it so the connection can be made.  See https://www.tutorialspoint.com/jdbc/jdbc-db-connections.htm
      * @param hostname The hostname of the connection
-     * @throws SQLException Thrown if no driver class could be loaded
+     * @throws ChainDataSourceException Thrown if no driver class could be loaded
      */
     private void registerDriver(String hostname) throws ChainDataSourceException {
         String driverClassName;
@@ -104,6 +120,15 @@ public class SQLAdapter implements SQLChainDataSource  {
         }
     }
 
+    /**
+     * This function will attempt to execute a query that it is given.  If it succeeds then the results are returned.
+     *
+     * If it fails then the query will be repaired and the query will be run again, returning the results.
+     *
+     * @param query query that is to be executed
+     * @return ResultSet of query
+     * @throws ChainDataSourceException Issue with running or repairing
+     */
     @Override
     public ResultSet executeQuery(String query) throws ChainDataSourceException {
         SQLQueryRunner runner;
@@ -131,7 +156,12 @@ public class SQLAdapter implements SQLChainDataSource  {
         }
     }
 
-
+    /**
+     * Attempts to repair a query
+     * @param query query that is being repaired
+     * @return repaired query
+     * @throws ChainDataSourceException If the query cannot be repaired
+     */
     public String getRepairedQuery(String query) throws ChainDataSourceException {
         try {
             SQLDatabase db = new SQLDatabase(connection);
@@ -139,6 +169,6 @@ public class SQLAdapter implements SQLChainDataSource  {
             return queryRepair.runRepairer();
         } catch (SQLException e) {
             throw new ChainDataSourceException("Could not get repaired query: " + query, e);
-        } // catch wrong structure
+        }
     }
 }
