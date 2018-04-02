@@ -10,10 +10,20 @@ $ git clone https://github.com/lewis785/CHAINJava
 $ cd CHAINJava
 ```
 
-## Gradle
+You can then run the main program with the following command:
+
+```
+$ ./gradlew run
+```
+
+If you have any issues, check the [Wiki](https://github.com/lewis785/CHAINJava/wiki) or the troubleshooting guide at the bottom of this README file.
+
+## Contributing
+
+### Gradle
 The project uses Gradle as its build tool and for dependency management.  
 
-### Dependencies
+#### Dependencies
 
 While most dependencies are available on a 
 public repository, SPSM is not.  A gradle task will execute a script to retrieve them and build them from github sources.
@@ -25,7 +35,7 @@ installed):
 $ ./gradlew getSPSM
 ```
 
-### Testing
+#### Testing
 
 The tests can be executed using gradle.
 
@@ -37,7 +47,7 @@ The tests can be executed using gradle.
 
 There are three test sets: integrationTest, sparqlTest and the unit tests. A test report will be available at a link provided by the console.
 
-### Building
+#### Building
 
 The project can be built from gradle.  This is done using:
 
@@ -49,7 +59,7 @@ $ ./gradlew build
 This will build everything and run the tests.  The tests can be ignored by appending `-x test` and/or `-x fastTest`.
 All of the built items will available in the build directory (the jar file will be in build/libs).
 
-### Running
+#### Running
 
 Gradle can be used to run the main program.  This can be done by running
 
@@ -57,8 +67,7 @@ Gradle can be used to run the main program.  This can be done by running
 $ ./gradlew run
 ```
 
-
-## Importing into Eclipse
+### Importing into Eclipse
 
 To import into eclipse:
  
@@ -72,7 +81,7 @@ The project will now be imported, but will show errors if the `getSPSM` task has
 - In the folder pane, right click on the `build.gradle` file and select `gradle` then `refresh gradle project` - 
 this will cause eclipse to refresh the project, this time finding the SPSM dependencies.
 
-## Importing into Intellij
+### Importing into Intellij
 
 To import into intellij
 
