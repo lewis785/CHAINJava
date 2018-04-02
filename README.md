@@ -48,6 +48,8 @@ Assume that the database table `users` did not actually contain a collumn `lastn
 
 The code above would try and run the query and notice that it fails.  It would then repair the query and run it again, this time retrieveing the correct results.
 
+Note there may be an issue with some missing xml files.  To get around this, copy the files "s-match.xml", "s-match-minimal.xml" and "w31resource.xml" from the JAR file to the resources folder for your project.
+
 # Developer
 For further information about the system's architecture and underlying technologies, see the [Wiki](https://github.com/lewis785/CHAINJava/wiki).
 
