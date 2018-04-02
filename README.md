@@ -10,8 +10,6 @@ $ git clone https://github.com/lewis785/CHAINJava
 $ cd CHAINJava
 ```
 
-Note: [Maven](https://maven.apache.org/install.html) must be installed for the project to build. If you're a Mac user with [Homebrew](https://brew.sh) installed, you can use the `brew install maven` command.
-
 ## Gradle
 The project uses Gradle as its build tool and for dependency management.  
 
@@ -29,17 +27,15 @@ $ ./gradlew getSPSM
 
 ### Testing
 
-The tests can be executed using gradle.  There are two test sets: test and fastTest.  The fastTest set only runs a few tests
-and is completed much faster than the full test set.
+The tests can be executed using gradle.
 
-The tests can be run using:
+|  Command   |      Description      |
+|----------|-------------|
+| `./gradlew integrationTest` |  Runs the integration tests |
+| `./gradlew sparqlTest` |    Runs the sparql test suite   |
+| `./gradlew test` | Runs unit tests |
 
-```
-$ ./gradlew test
-$ ./gradlew fastTest
-```
-
-A test report will be available at /build/reports/(test/fastTest)/index/html
+There are three test sets: integrationTest, sparqlTest and the unit tests. A test report will be available at a link provided by the console.
 
 ### Building
 
@@ -87,3 +83,8 @@ The project should now be imported.  Hover over the icon in the bottom left of t
 Gradle pane.  If there are errors in the project it will be because SPSM has not been installed yet.
 
 To fix this, run the `getSPSM` task by clicking `Tasks` -> `build` -> `getSPSM` in the Gradle pane.
+
+## Troubleshooting
+
+*  [Maven](https://maven.apache.org/install.html) must be installed for the project to build. If you're a Mac user with [Homebrew](https://brew.sh) installed, you can use the `brew install maven` command.
+*  The project will not run on Java version 9; please ensure you have installed Java **version 8**. To check this, try `java -version`. 
