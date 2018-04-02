@@ -24,7 +24,7 @@ public class SQLAdapter implements SQLChainDataSource  {
     private Connection connection;
 
     /**
-     * Constructor for SQLAdapter, creates a connection to a database using username & password
+     * Constructor for SQLAdapter, creates a connection to a database using username and password
      * @param databaseUrl the url of the database being connected to (including driver prefix - See https://www.tutorialspoint.com/jdbc/jdbc-db-connections.htm)
      * @param databaseUsername username used to connect to the database
      * @param databasePassword password used to connect to the database
@@ -40,7 +40,7 @@ public class SQLAdapter implements SQLChainDataSource  {
     }
 
     /**
-     * Constructor for SQLAdapter, creates a connection to a database without a username & password
+     * Constructor for SQLAdapter, creates a connection to a database without a username and password
      * @param databaseUrl the url of the database being connected to (including driver prefix - See https://www.tutorialspoint.com/jdbc/jdbc-db-connections.htm)
      * @throws ChainDataSourceException Exception caused by issue establishing database connection
      */
