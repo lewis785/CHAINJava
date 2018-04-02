@@ -4,6 +4,50 @@
 
 The [CHAIn (Combining Heterogeneous Agencies’ Information) system](https://researchportal.hw.ac.uk/en/publications/dynamic-data-sharing-for-facilitating-communication-during-emerge) dynamically re-writes queries to databases when mismatches led to query failure. This repository focuses on a new SQL component.
 
+# User Guide
+
+The CHAIN system is currently available as a Java Library and can be used in other java projcets.  The system is not yet availiable on a public repository, but releases are available [here](https://github.com/lewis785/CHAINJava/releases).
+
+The following code shows how to use the system once the library is imported:
+
+```java
+package main;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import chain.sql.ChainDataSourceException;
+import chain.sql.SQLAdapter;
+
+
+public class MainClass {
+	public static void main(String[] args) {
+		try {
+			SQLAdapter adapter = new SQLAdapter("jdbc:mysql://mysql-server-1.macs.hw.ac.uk/dac31", "dac31", "sql");
+			
+			ResultSet results = adapter.executeQuery("SELECT surname FROM users");
+			
+			if(results.next()) {
+				System.out.println(results.getString(1));
+			}
+			
+		} catch (ChainDataSourceException e) {
+			// Fail during chain process
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// Fail when parsing results
+			e.printStackTrace();
+		}
+	}
+}
+
+```
+Assume that the database table `users` did not actually contain a collumn `lastname`, but instead used `surname`.  
+
+The code above would try and run the query and notice that it fails.  It would then repair the query and run it again, this time retrieveing the correct results.
+
+# Developer
+
 ## Getting Started
 Begin by cloning the repository by running the following in your terminal:
 
