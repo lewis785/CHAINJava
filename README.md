@@ -2,6 +2,8 @@
   <img src="https://user-images.githubusercontent.com/6493590/38195471-7ff6083c-3675-11e8-9c05-c07d5bc094fb.png" alt="CHAIn: Combining Heterogeneous Agencies' Information" />
 </p>
 
+[![Build Status](https://travis-ci.org/lewis785/CHAINJava.svg?branch=master)](https://travis-ci.org/lewis785/CHAINJava)
+
 The [CHAIn (Combining Heterogeneous Agencies’ Information) system](https://researchportal.hw.ac.uk/en/publications/dynamic-data-sharing-for-facilitating-communication-during-emerge) dynamically re-writes queries to databases when mismatches led to query failure. This repository focuses on a new SQL component.
 
 ## Getting Started
