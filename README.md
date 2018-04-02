@@ -10,12 +10,6 @@ $ git clone https://github.com/lewis785/CHAINJava
 $ cd CHAINJava
 ```
 
-You can then run the main program with the following command:
-
-```
-$ ./gradlew run
-```
-
 If you have any issues, check the [Wiki](https://github.com/lewis785/CHAINJava/wiki) or the troubleshooting guide at the bottom of this README file.
 
 ## Contributing
@@ -51,21 +45,12 @@ There are three test sets: integrationTest, sparqlTest and the unit tests. A tes
 
 The project can be built from gradle.  This is done using:
 
-
 ```
 $ ./gradlew build
 ```
 
 This will build everything and run the tests.  The tests can be ignored by appending `-x test` and/or `-x fastTest`.
 All of the built items will available in the build directory (the jar file will be in build/libs).
-
-#### Running
-
-Gradle can be used to run the main program.  This can be done by running
-
-```
-$ ./gradlew run
-```
 
 ### Importing into Eclipse
 
