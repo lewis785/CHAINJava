@@ -26,11 +26,11 @@ public class SQLQueryAnalyser {
     protected Statement stmt;
 
     /**
-     * Constructor
+     * Constructor for SQLQueryAnalyser
      * @param query - the SQL query to be analysed.
      * @throws ChainDataSourceException An exception related to data sources
      */
-    public SQLQueryAnalyser(String query) throws ChainDataSourceException {
+    SQLQueryAnalyser(String query) throws ChainDataSourceException {
         try {
             this.stmt = CCJSqlParserUtil.parse(query);
         } catch (JSQLParserException ex) {
@@ -59,8 +59,8 @@ public class SQLQueryAnalyser {
     }
 
     /**
-     * 
-     * @return The column names
+     * Retrieves column names from the query
+     * @return The query column names
      */
     public List<String> getColumns() {
         Select fullStatement = (Select) this.stmt;
@@ -72,11 +72,10 @@ public class SQLQueryAnalyser {
     }
 
     /**
-     * 
-     * @param where
-     * @return An ArrayList of column names
+     * Recursively finds columns used by a WHERE expression
+     * @param where WHERE expression being processed
+     * @return A List of strings representing column names
      */
-    // TODO: could probably return the actual column objects and update them instead of having to go back in with the visitor
     private List<String> recurseWhereToColumns(Expression where) {
         if (where instanceof Column) {
             ArrayList<String> ret = new ArrayList<>();
@@ -92,6 +91,11 @@ public class SQLQueryAnalyser {
         return ret;
     }
 
+    /**
+     *  Retrieves all the columns provided as part of a SELECT expression
+     * @param select SELECT expression being processed
+     * @return A List of strings representing column names
+     */
     private List<String> getColumnNamesFromSelect(PlainSelect select) {
         GetSelectColumnVisitor visitor = new GetSelectColumnVisitor();
         for(SelectItem selItem : select.getSelectItems()) {
