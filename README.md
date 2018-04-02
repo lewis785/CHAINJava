@@ -6,6 +6,8 @@
 
 The [CHAIn (Combining Heterogeneous Agencies’ Information) system](https://researchportal.hw.ac.uk/en/publications/dynamic-data-sharing-for-facilitating-communication-during-emerge) dynamically re-writes queries to databases when mismatches led to query failure. This repository focuses on a new SQL component.
 
+For further information about the system's architecture and underlying technologies, see the [Wiki](https://github.com/lewis785/CHAINJava/wiki).
+
 ## Getting Started
 Begin by cloning the repository by running the following in your terminal:
 
