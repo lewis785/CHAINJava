@@ -15,8 +15,8 @@ public class ChainDataSourceException extends Exception {
      * Constructor method for tailored exception relating
      * to interfacing with data sources.
      *
-     * @param message String descriptive error message
-     * @param cause Throwable
+     * @param message descriptive error message
+     * @param cause the original exception
      */
     public ChainDataSourceException(String message, Throwable cause) {
         super(message, cause);

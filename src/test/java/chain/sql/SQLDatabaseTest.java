@@ -96,4 +96,11 @@ public class SQLDatabaseTest {
     {
         database.tableContainsColumn("false_table","username");
     }
+
+    @Test
+    public void columnInAnyTable() {
+        assertTrue(database.columnInAnyTable("username"));
+        assertTrue(database.columnInAnyTable("access"));
+        assertFalse(database.columnInAnyTable("kettle"));
+    }
 }

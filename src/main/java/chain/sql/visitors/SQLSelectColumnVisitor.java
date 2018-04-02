@@ -43,7 +43,7 @@ public class SQLSelectColumnVisitor implements StatementVisitor, SelectVisitor, 
      *
      * Constructor for visitor.
      *
-     * @param replacements map containing replacements in old => new format
+     * @param replacements map containing replacements in (old format, new format)
      */
     public SQLSelectColumnVisitor(Map<String, String> replacements) {
         this.replacements = replacements;

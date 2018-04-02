@@ -2,11 +2,13 @@
   <img src="https://user-images.githubusercontent.com/6493590/38195471-7ff6083c-3675-11e8-9c05-c07d5bc094fb.png" alt="CHAIn: Combining Heterogeneous Agencies' Information" />
 </p>
 
+[![Build Status](https://travis-ci.org/lewis785/CHAINJava.svg?branch=master)](https://travis-ci.org/lewis785/CHAINJava)
+
 The [CHAIn (Combining Heterogeneous Agencies’ Information) system](https://researchportal.hw.ac.uk/en/publications/dynamic-data-sharing-for-facilitating-communication-during-emerge) dynamically re-writes queries to databases when mismatches led to query failure. This repository focuses on a new SQL component.
 
 # User Guide
 
-The CHAIN system is currently available as a Java Library and can be used in other java projcets.  The system is not yet availiable on a public repository, but releases are available [here](https://github.com/lewis785/CHAINJava/releases).
+The CHAIN system is currently available as a Java Library and can be used in other java projcets.  The system is not yet availiable on a public repository, but uberjar releases (containing all dependencies) are available [here](https://github.com/lewis785/CHAINJava/releases).
 
 The following code shows how to use the system once the library is imported:
 
@@ -47,6 +49,7 @@ Assume that the database table `users` did not actually contain a collumn `lastn
 The code above would try and run the query and notice that it fails.  It would then repair the query and run it again, this time retrieveing the correct results.
 
 # Developer
+For further information about the system's architecture and underlying technologies, see the [Wiki](https://github.com/lewis785/CHAINJava/wiki).
 
 ## Getting Started
 Begin by cloning the repository by running the following in your terminal:
@@ -64,9 +67,8 @@ $ ./gradlew getSPSM
 
 If you have any issues, check the [Wiki](https://github.com/lewis785/CHAINJava/wiki) or the troubleshooting guide at the bottom of this README file.
 
-## Contributing
 
-### Gradle
+## Gradle
 The project uses Gradle as its build tool and for dependency management.  
 
 #### Dependencies

@@ -121,6 +121,21 @@ public class SQLDatabase {
 
 
     /**
+     * Checks if a column exists in any available table
+     * @param columnName name of column to search for
+     * @return true if column exists in a table, otherwise returns false
+     */
+    public boolean columnInAnyTable(String columnName) {
+        for (String tableName : dbTables.keySet()){
+
+            if (dbTables.get(tableName).containsColumn(columnName))
+                return true;
+        }
+        return false;
+    }
+
+
+    /**
      * getTables
      *
      * Returns the set of tables within the database

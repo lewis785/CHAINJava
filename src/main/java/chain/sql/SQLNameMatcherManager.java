@@ -24,7 +24,7 @@ public class SQLNameMatcherManager {
      * @param queryTableNames List of names for which replacement should be found
      * @param database Structure of database being queried
      */
-    public SQLNameMatcherManager(List<String> queryTableNames, List<String> queryColumnNames, SQLDatabase database) {
+    SQLNameMatcherManager(List<String> queryTableNames, List<String> queryColumnNames, SQLDatabase database) {
         this.queryTableNames = queryTableNames;
         this.queryColumnNames = queryColumnNames;
         this.database = database;
@@ -37,7 +37,7 @@ public class SQLNameMatcherManager {
      * @param database Structure of database being queried
      * @param matcher A precreated WordNetMatcher object
      */
-    public SQLNameMatcherManager(List<String> queryTableNames, List<String> queryColumnNames, SQLDatabase database, WordNetMatcher matcher) {
+    SQLNameMatcherManager(List<String> queryTableNames, List<String> queryColumnNames, SQLDatabase database, WordNetMatcher matcher) {
         this.queryTableNames = queryTableNames;
         this.queryColumnNames = queryColumnNames;
         this.database = database;
@@ -47,8 +47,8 @@ public class SQLNameMatcherManager {
     /**
      * Goes through each table name provided to it and attempts to find a replacement
      * @return Replacement names as a map in the form (original, replacement)
-     * @throws SMatchException
-     * @throws WordNetMatchingException
+     * @throws SMatchException Exception caused by
+     * @throws WordNetMatchingException Exception caused by WordNet
      */
     public Map<String, String> getReplacementTableNames() throws SMatchException, WordNetMatchingException {
         Map<String, String> replacements = new HashMap<>();
@@ -66,7 +66,8 @@ public class SQLNameMatcherManager {
     /**
      *
      * @return Map of original column name to replacement column name
-     * @throws SMatchException
+     * @throws SMatchException Exception caused by the SPSM process
+     * @throws NoReplacementFoundException Exception thrown when a column name cannot be replaced
      */
     public Map<String, String> getReplacementColumnNames() throws SMatchException, NoReplacementFoundException {
         Map<String, String> replacements = new HashMap<>();
@@ -93,22 +94,29 @@ public class SQLNameMatcherManager {
         return replacements;
     }
 
-
+    /**
+     * Checks if column exists in a table, if it does not then it attempts to find a replacement name
+     * @param originalColumnName Name of column being checked
+     * @param tables A collection SQLTable objects used to find possible replacement column names
+     * @return A map which maps (original name, replacement name)
+     * @throws SMatchException Exception caused by the SPSM process
+     */
     private Map<String, String> getReplacementColumnNamesFromTables(String originalColumnName, Collection<SQLTable> tables) throws SMatchException {
         Map<String, String> replacements = new HashMap<>();
 
 
             // TODO: if column names are with table names, only check for that table
-        for (SQLTable table : tables) {
-            try {
-                WordNetMatcher columnMatcher = new WordNetMatcher(table.getColumnNames());
-                if (!table.containsColumn(originalColumnName)) {
-                    String replacement = columnMatcher.match(originalColumnName);
-                    replacements.put(originalColumnName, replacement);
-                }
+        if(!database.columnInAnyTable(originalColumnName))
+        {
+            for (SQLTable table : tables) {
+                try {
+                    WordNetMatcher columnMatcher = new WordNetMatcher(table.getColumnNames());
+                        String replacement = columnMatcher.match(originalColumnName);
+                        replacements.put(originalColumnName, replacement);
 
-            } catch(WordNetMatchingException e){
-               // e.printStackTrace();
+                } catch (WordNetMatchingException e) {
+                    // e.printStackTrace();
+                }
             }
         }
         return replacements;
